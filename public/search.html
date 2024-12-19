@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Movies</title>
+
+    <link rel="stylesheet" href="css/form.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #1c1c1c;
+            font-family: Arial, sans-serif;
+            color: #f0f0f0;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: #bbbbbb;
+            margin: 5px 0 20px;
+        }
+
+        .form {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .search-input {
+            width: calc(100% - 40px);
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #444;
+            border-radius: 30px;
+            font-size: 18px;
+            background-color: #2b2b2b;
+            color: #f0f0f0;
+        }
+
+        .submit-btn {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .results {
+            margin-top: 20px;
+        }
+
+        .results p {
+            font-size: 16px;
+            color: #f0f0f0;
+        }
+
+        .alert {
+            color: red;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Find Your Favorite Movies</h1>
+        <p>Search for movies by entering a keyword below</p>
+    </div>
+
+    <div class="form">
+        <input type="text" placeholder="Search movies..." autocomplete="off" class="search-input" required>
+        <button class="submit-btn">Search</button>
+
+        <div class="results">
+            <!-- Search results or messages will appear here -->
+        </div>
+    </div>
+
+    <script>
+        const searchBtn = document.querySelector('.submit-btn');
+        const searchInput = document.querySelector('.search-input');
+        const resultsDiv = document.querySelector('.results');
+
+        searchBtn.addEventListener('click', () => {
+            const query = searchInput.value.trim();
+
+            // Clear previous results
+            resultsDiv.innerHTML = '';
+
+            if (query === '') {
+                resultsDiv.innerHTML = '<p class="alert">Please enter a keyword to search.</p>';
+                return;
+            }
+
+            // Placeholder for database search logic
+            const movies = ["Battle of the Bands", "The Last Battle", "Epic Battles"];
+            const filteredMovies = movies.filter(movie => movie.toLowerCase().includes(query.toLowerCase()));
+
+            if (filteredMovies.length > 0) {
+                filteredMovies.forEach(movie => {
+                    const movieElement = document.createElement('p');
+                    movieElement.textContent = movie;
+                    resultsDiv.appendChild(movieElement);
+                });
+            } else {
+                resultsDiv.innerHTML = '<p class="alert">No movies found.</p>';
+            }
+        });
+    </script>
+
+</body>
+</html>
